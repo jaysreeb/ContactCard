@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Poppins&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/*Removing the default spacing around every elements using universal selector keeping margin and padding 0*/
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-family:"Space Mono", monospace;    
+    position: relative;
+    background: linear-gradient(120deg, #131212, #4ECDC4);
+    overflow: hidden; 
+}
+/*Trying to make circles behind the card to make it look cool and try some other techniques*/
+
+/* First Circle */
+body::before {
+    content: '';
+    position: absolute;
+    width: 200px;  /* Adjust size */
+    height: 200px; /* Adjust size */
+    background: linear-gradient(120deg, #1d976c, #2c3e50);
+    border-radius: 50%;
+    left: calc(50% - 400px); /* Position left of card */
+    transform: translate(50%, -1%); /* Precise centering */
+    opacity: 70%;
+    z-index: -1; /* Behind card */
+}
+
+/* Second Circle */
+body::after {
+    content: '';
+    position: absolute;
+    width: 250px;  /* Different size */
+    height: 250px; /* Different size */
+    background: linear-gradient(120deg, #1d976c, #2c3e50);
+    border-radius: 50%;
+    right: calc(50% - 200px); /* Position right of card */
+    transform: translate(50%, -50%); /* Precise centering */
+    opacity: 10;
+    z-index: -1; /* Behind card */
+}
+.hover-hint{
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count:1;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #d3e0dc;
+}
+
+@keyframes bounce {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+  
+.flip-container {
+    position: relative; /* Forroper stacking */
+    z-index: 10; /* Above background circles */
+}
+/*Containers for the card*/
+.flip-container{
+    width: 300px;
+    height: 450px;
+    background-color: transparent;
+    border-radius: 10px;
+    perspective: 1200px;
+}
+/*Flip inner container*/
+.flip-inner-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+}
+/*Add hover to flip horizontally*/
+.flip-container:hover .flip-inner-container{
+    transform: rotateY(180deg);
+}
+/*position front and back*/
+
+.flip-front, .flip-back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+    
+}
+/* flip  front Start Here */
+.flip-front{
+    /*background-image: linear-gradient(to right, #202020, rgb(151, 34, 34));   */
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.25);
+}
+
+/*Transitioning the image*/
+.profile-image1 img{
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-radius: 50%;
+    background-color: turquoise;
+}
+.flip-front h3{
+    margin-top: 10%;
+    font-size: 20px;
+    color: #fff;
+}
+.flip-front h4{
+    margin-top: 30%;
+    font-size: 1 rem;
+    color: #05bbe9;
+}
+
+/* flip back, Starts Here */
+.flip-back{
+    border: 2px solid rgba(22, 10, 10, 0.1);
+    transform: rotateY(180deg);
+}
+.flip-back h2{
+    color: #fff;
+    text-transform: uppercase;
+}
+.flip-back .skills{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+li{ 
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 15px;
+    list-style: none;
+    color: #fff;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+/*make a calendar invite in the back of card and make it pretty using different techniques*/
+.calendar-invite{
+    margin-top: 20vh;
+    text-align: center;
+}
+.book-call-btn{
+    color: #d3e0dc;   
+    padding: 10px 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.book-call-btn:hover{
+    background-color:rgba(255, 255, 255, 0.2); ;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgb(241, 234, 234);
+}
+.social-icons {
+    position: absolute;
+    align-items: center;
+    margin-top: 15px ;
+    bottom: 5vh;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    left: 0;
+}
+.social-icons a {
+    color: #fad7d7;
+    width: 30px;
+    height:30px;
+    font-size: 30px;
+    border-radius:10%;
+}
+.social-icons a:hover{
+    transform: scale(1.2);
+    color: #4ECDC4;
+}
+
+/* Media Query for smaller screens */
+@media (max-height: 600px) {
+    .social-icons {
+        bottom: 30px;
+    }
+
+    .book-call-btn {
+        bottom: 70px;
+    }
+}
+/* For very small screens */
+@media (max-height: 500px) {
+    .social-icons {
+        bottom: 10px;
+        gap: 15px; /* Reduce gap between icons */
+    }
+    /* Reduce font sizes if needed */
+    .book-call-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+        bottom: 10px;
+    }
+}
